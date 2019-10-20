@@ -2,6 +2,10 @@
 FROM ubuntu:latest AS build
 COPY . /src
 
+# Update Software repository
+RUN apt-get clean 
+RUN apt-get -qq update
+
 # Install required packets from ubuntu repository
 RUN apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils libssl-dev python pkg-config lld swig python-dev libncurses5-dev
 
@@ -19,6 +23,11 @@ RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
 
 # final stage
 FROM ubuntu:latest
+
+# Update Software repository
+RUN apt-get clean 
+RUN apt-get -qq update
+
 # Install required packets from ubuntu repository
 RUN apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils libssl-dev python pkg-config lld swig python-dev libncurses5-dev
 
