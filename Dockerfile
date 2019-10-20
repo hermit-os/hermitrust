@@ -12,13 +12,13 @@ RUN apt-get install -y apt-transport-https curl wget vim git binutils autoconf a
 # download latest version
 RUN git clone --depth 1 -b rusty-hermit https://github.com/hermitcore/rust.git
 
+# Install Rust toolchain
+RUN cp /src/config.toml rust
+RUN cd rust && ./x.py install
+
 ENV PATH="/opt/hermit/bin:/root/.cargo/bin:${PATH}"
 ENV XARGO_RUST_SRC="/root/.cargo/lib/rustlib/src/rust/src/"
 ENV EDITOR=vim
-
-# Install Rust toolchain
-RUN cp /src/config.toml /src/rust
-RUN cd /src/rust && ./x.py install
 RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
 
 # final stage
