@@ -11,7 +11,7 @@ docker:
   stage: prepare
   script:
     - export RUST_CHANNEL="nightly"
-    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
     - docker build --build-arg CHANNEL=${RUST_CHANNEL} -t hermitcore/rustyhermit .
     - export RUST_DATE=$(docker run -it hermitcore/rustyhermit rustc --version | grep -oE "[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}")
     - export RUST_VER=$(docker run -it hermitcore/rustyhermit --version | grep -oE "[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]")
