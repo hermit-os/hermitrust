@@ -1,1 +1,1 @@
-# hermitrust - Docker environment for building rust-hermit binaries
+# hermitrust - Docker environment for building rusty-hermit binaries
