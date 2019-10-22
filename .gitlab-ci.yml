@@ -11,7 +11,7 @@ docker:
   stage: prepare
   script:
     - export RUST_CHANNEL="nightly"
-    - export RUSTY_LATEST=$(curl -s https://api.github.com/repos/hermitcore/libhermit-rs/releases/latest | grep tag_name | sed -E 's/.*"([^"]+)".*/\1/')"
+    - export RUSTY_LATEST="$(curl -s https://api.github.com/repos/hermitcore/libhermit-rs/releases/latest | grep tag_name | sed -E 's/.*"([^"]+)".*/\1/')"
     - echo ${RUSTY_LATEST}
     - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
     - docker build --build-arg LATEST=${RUSTY_LATEST} -t hermitcore/rustyhermit .
