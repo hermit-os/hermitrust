@@ -23,6 +23,7 @@ RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
 
 # build libos
 RUN curl --silent "https://api.github.com/repos/hermitcore/libhermit-rs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs -I {} curl -sOL "https://github.com/USER/REPO/archive/"{}'.tar.gz'
+RUN ls -la
 RUN tar -xzvf *.tar.gz
 RUN curl --silent "https://api.github.com/repos/hermitcore/libhermit-rs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs -I {} cd "libhermit-rs-"{} && make && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
 
