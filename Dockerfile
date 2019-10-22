@@ -25,9 +25,7 @@ RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
 # build libos
 ARG LATEST
 ENV RUSTY_LATEST=$LATEST
-RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz"
-RUN tar -xzvf *.tar.gz
-RUN cd /root/${RUSTY_LATEST} &&  make && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
+RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz" && mkdir libhermit && tar -xzvf --one-top-level=libhermit ${RUSTY_LATEST}.tar.gz && cd libhermit &&  make && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
 
 # final stage
 FROM ubuntu:latest
