@@ -1,1 +1,4 @@
-# hermitrust - Docker environment for building rusty-hermit binaries
+# hermitrust
+
+A plain docker environment for building [RustyHermit binaries](https://github.com/hermitcore/libhermit-rs).
+Built every night with the latest nightly version of Rust.
