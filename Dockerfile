@@ -21,8 +21,9 @@ ENV XARGO_RUST_SRC="/root/.cargo/lib/rustlib/src/rust/src/"
 ENV EDITOR=vim
 RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
 
+# build libos
 RUN curl --silent "https://api.github.com/repos/hermitcore/libhermit-rs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs -I {} curl -sOL "https://github.com/USER/REPO/archive/"{}'.tar.gz'
-RUN tar xzvf *.tar.gz
+RUN tar -xzvf *.tar.gz
 RUN curl --silent "https://api.github.com/repos/hermitcore/libhermit-rs/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs -I {} cd "libhermit-rs-"{} && make && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
 
 # final stage
@@ -42,7 +43,7 @@ RUN echo "deb [trusted=yes] https://dl.bintray.com/hermitcore/ubuntu bionic main
 RUN apt-get -qq update
 
 # Install required packets from ubuntu repository
-RUN apt-get install -y --allow-unauthenticated binutils-hermit gcc-hermit-rs #newlib-hermit-rs pte-hermit-rs gcc-hermit-rs libhermit-rs
+#RUN apt-get install -y --allow-unauthenticated binutils-hermit gcc-hermit-rs #newlib-hermit-rs pte-hermit-rs gcc-hermit-rs libhermit-rs
 
 COPY --from=build /root/.cargo .
 
