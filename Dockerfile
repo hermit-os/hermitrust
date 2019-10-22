@@ -1,6 +1,7 @@
 # Download base image ubuntu 18.04
 FROM ubuntu:latest AS build
 COPY . /src
+WORKDIR /root
 
 # Update Software repository
 RUN apt-get clean 
@@ -22,10 +23,8 @@ ENV EDITOR=vim
 RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
 
 # build libos
-ENV LATEST="$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | grep tag_name | sed -E 's/.*"([^"]+)".*/\1/')"
-RUN echo ${LATEST}
-RUN cd /root && curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${LATEST}.tar.gz"
-RUN cd /root && tar -xzvf *.tar.gz
+RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${LATEST}.tar.gz"
+RUN tar -xzvf *.tar.gz
 RUN cd /root/${LATEST} &&  make && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
 
 # final stage
