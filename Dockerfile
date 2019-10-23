@@ -8,7 +8,7 @@ RUN apt-get clean
 RUN apt-get -qq update
 
 # Install required packets from ubuntu repository
-RUN apt-get install -y apt-transport-https utils curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils libssl-dev python pkg-config lld swig python-dev libncurses5-dev
+RUN apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils libssl-dev python pkg-config lld swig python-dev libncurses5-dev
 
 # download latest version
 RUN git clone --depth 1 -b hermit https://github.com/hermitcore/rust.git
