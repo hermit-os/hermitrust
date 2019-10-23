@@ -15,7 +15,7 @@ docker:
     - echo ${RUSTY_LATEST}
     - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
     - docker build --build-arg LATEST=${RUSTY_LATEST} -t hermitcore/rustyhermit .
-    - export RUST_DATE=$(docker run hermitcore/rustyhermit rustc --version | grep -oE "[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}")
+    - export RUST_DATE=$(date +"%Y-%m-%d")
     - export RUST_VER=$(docker run hermitcore/rustyhermit rustc --version | grep -oE "[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]")
     - export TAG1="${RUST_VER}-${RUST_CHANNEL}"
     - export TAG2="${RUST_CHANNEL}-${RUST_DATE}"
