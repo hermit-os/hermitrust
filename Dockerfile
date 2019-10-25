@@ -29,6 +29,7 @@ RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST
 
 # final stage
 FROM ubuntu:latest
+WORKDIR /root
 
 # Update Software repository
 RUN apt-get clean 
