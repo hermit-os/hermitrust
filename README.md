@@ -4,7 +4,7 @@
 These scripts build a plain docker environment for  [RustyHermit](https://github.com/hermitcore/libhermit-rs).
 The toolchain is built every night with the latest nightly version of Rust.
 
-## Usage 
+## Usage
 
 The Docker container for [rustyhermit](https://cloud.docker.com/u/hermitcore/repository/docker/hermitcore/rustyhermit) provides an simple way to get the toolchain for RustyHermit.
 Please pull the container and use *cargo* to cross compile the application.
