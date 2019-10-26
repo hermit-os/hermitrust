@@ -11,7 +11,7 @@ RUN apt-get -qq update
 RUN apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils libssl-dev python pkg-config lld swig python-dev libncurses5-dev
 
 # download latest version
-RUN git clone --depth 1 -b rusty-hermit https://github.com/hermitcore/rust.git
+RUN git clone --depth 1 -b hermit https://github.com/hermitcore/rust.git
 
 # Install Rust toolchain
 RUN cp /src/config.toml rust
@@ -25,7 +25,7 @@ RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
 # build libos
 ARG LATEST
 ENV RUSTY_LATEST=$LATEST
-RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz" && mkdir libhermit && tar xzvf ${RUSTY_LATEST}.tar.gz --one-top-level=libhermit --strip-components 1 && cd libhermit &&  make && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
+RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz" && mkdir libhermit && tar xzvf ${RUSTY_LATEST}.tar.gz --one-top-level=libhermit --strip-components 1 && cd libhermit &&  make lib && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
 
 # final stage
 FROM ubuntu:latest
