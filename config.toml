@@ -310,13 +310,13 @@ debug = true
 # Can be overriden for specific subsets of Rust code (rustc, std or tools).
 # Debuginfo for tests run with compiletest is not controlled by this option
 # and needs to be enabled separately with `debuginfo-level-tests`.
-debuginfo-level = 2 #if debug { 2 } else { 0 }
+#debuginfo-level = if debug { 2 } else { 0 }
 
 # Debuginfo level for the compiler.
 debuginfo-level-rustc = 0
 
 # Debuginfo level for the standard library.
-debuginfo-level-std = debuginfo-level
+debuginfo-level-std = 2
 
 # Debuginfo level for the tools.
 debuginfo-level-tools = 0
