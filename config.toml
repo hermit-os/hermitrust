@@ -189,7 +189,7 @@ extended = true
 # Installs chosen set of extended tools if enabled. By default builds all.
 # If chosen tool failed to build the installation fails.
 #tools = ["cargo", "rls", "clippy", "rustfmt", "analysis", "src"]
-tools = ["cargo", "src"]
+tools = ["cargo", "src", "llvm-tools"]
 
 # Verbosity level: 0 == not verbose, 1 == verbose, 2 == very verbose
 #verbose = 0
