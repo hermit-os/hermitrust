@@ -27,6 +27,7 @@ RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install --git https:/
 ARG LATEST
 ENV RUSTY_LATEST=$LATEST
 RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz" && mkdir libhermit && tar xzvf ${RUSTY_LATEST}.tar.gz --one-top-level=libhermit --strip-components 1 && cd libhermit &&  make lib && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
+RUN ls -la 
 
 # final stage
 FROM ubuntu:latest
