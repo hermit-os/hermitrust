@@ -27,7 +27,6 @@ RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install --git https:/
 ARG LATEST
 ENV RUSTY_LATEST=$LATEST
 RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz" && mkdir libhermit && tar xzvf ${RUSTY_LATEST}.tar.gz --one-top-level=libhermit --strip-components 1 && cd libhermit &&  make lib && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
-RUN ls -la 
 
 # final stage
 FROM ubuntu:latest
@@ -51,6 +50,9 @@ RUN apt-get -qq update
 
 RUN mkdir -p /root/.cargo
 COPY --from=build /root/.cargo /root/.cargo
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-objcopy /root/.cargo/lib/rustlib/x86_64-unknown-linux-gnu/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-objdump /root/.cargo/lib/rustlib/x86_64-unknown-linux-gnu/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-readelf /root/.cargo/lib/rustlib/x86_64-unknown-linux-gnu/bin/
 
 ENV PATH="/opt/hermit/bin:/root/.cargo/bin:${PATH}"
 ENV XARGO_RUST_SRC="/root/.cargo/lib/rustlib/src/rust/src/"
