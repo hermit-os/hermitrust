@@ -55,6 +55,10 @@ COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-
 COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-readelf /root/.cargo/bin/
 COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-size /root/.cargo/bin/
 COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-ar /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-strip /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-readobj /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-nm /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-profdata /root/.cargo/bin/
 
 ENV PATH="/opt/hermit/bin:/root/.cargo/bin:${PATH}"
 ENV XARGO_RUST_SRC="/root/.cargo/lib/rustlib/src/rust/src/"
