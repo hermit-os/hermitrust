@@ -50,9 +50,11 @@ RUN apt-get -qq update
 
 RUN mkdir -p /root/.cargo
 COPY --from=build /root/.cargo /root/.cargo
-COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-objcopy /root/.cargo/lib/rustlib/x86_64-unknown-linux-gnu/bin/
-COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-objdump /root/.cargo/lib/rustlib/x86_64-unknown-linux-gnu/bin/
-COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-readelf /root/.cargo/lib/rustlib/x86_64-unknown-linux-gnu/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-objcopy /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-objdump /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-readelf /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-size /root/.cargo/bin/
+COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-ar /root/.cargo/bin/
 
 ENV PATH="/opt/hermit/bin:/root/.cargo/bin:${PATH}"
 ENV XARGO_RUST_SRC="/root/.cargo/lib/rustlib/src/rust/src/"
