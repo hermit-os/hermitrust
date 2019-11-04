@@ -21,7 +21,6 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 ENV XARGO_RUST_SRC="/root/.cargo/lib/rustlib/src/rust/src/"
 ENV EDITOR=vim
 RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-xbuild
-RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install --git https://github.com/hermitcore/bootimage.git --branch hermit bootimage
 
 # build libos
 ARG LATEST
