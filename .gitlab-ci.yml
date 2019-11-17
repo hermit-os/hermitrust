@@ -14,7 +14,7 @@ docker:
     - export RUSTY_LATEST="$(curl -s https://api.github.com/repos/hermitcore/libhermit-rs/releases/latest | grep tag_name | sed -E 's/.*"([^"]+)".*/\1/')"
     - echo ${RUSTY_LATEST}
     - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
-    - docker build --build-arg LATEST=${RUSTY_LATEST} -t hermitcore/rustyhermit .
+    - docker build --no-cache --build-arg LATEST=${RUSTY_LATEST} -t hermitcore/rustyhermit .
     - export RUST_DATE=$(date +"%Y-%m-%d")
     - export RUST_VER=$(docker run hermitcore/rustyhermit rustc --version | grep -oE "[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]")
     - export TAG1="${RUST_VER}-${RUST_CHANNEL}"
