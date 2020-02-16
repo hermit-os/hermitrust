@@ -3,12 +3,8 @@ FROM ubuntu:latest AS build
 COPY . /src
 WORKDIR /root/
 
-# Update Software repository
-RUN apt-get clean 
-RUN apt-get -qq update
-
-# Install required packets from ubuntu repository
-RUN apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils libssl-dev python pkg-config lld swig python-dev libncurses5-dev
+# Update and install required packets from ubuntu repository
+RUN apt-get clean && apt-get -qq update && apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils libssl-dev python pkg-config lld swig python-dev libncurses5-dev
 
 # download latest version
 RUN git clone --depth 1 -b master https://github.com/rust-lang/rust.git
@@ -31,18 +27,15 @@ RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST
 FROM ubuntu:latest
 WORKDIR /root/
 
-# Update Software repository
-RUN apt-get clean 
-RUN apt-get -qq update
 
-# Install required packets from ubuntu repository
-RUN apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils lld net-tools iputils-ping
+# Update and install required packets from ubuntu repository
+RUN apt-get clean && apt-get -qq update && apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils lld net-tools iputils-ping
 
 # add path to hermitcore packets
 RUN echo "deb [trusted=yes] https://dl.bintray.com/hermitcore/ubuntu bionic main" | tee -a /etc/apt/sources.list
 
 # Update Software repository
-RUN apt-get -qq update
+#RUN apt-get -qq update
 
 # Install required packets from ubuntu repository
 #RUN apt-get install -y --allow-unauthenticated binutils-hermit gcc-hermit-rs #newlib-hermit-rs pte-hermit-rs gcc-hermit-rs libhermit-rs
