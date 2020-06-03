@@ -390,13 +390,18 @@ backtrace = false
 # rustc to execute.
 lld = true
 
+# Indicates whether LLD will be used to link Rust crates during bootstrap on
+# supported platforms. The LLD from the bootstrap distribution will be used
+# and not the LLD compiled during the bootstrap.
+#
+# LLD will not be used if we're cross linking or running tests.
+#
+# Explicitly setting the linker for a target will override this option.
+#use-lld = false
+
 # Indicates whether some LLVM tools, like llvm-objdump, will be made available in the
 # sysroot.
 llvm-tools = true
-
-# Indicates whether LLDB will be made available in the sysroot.
-# This is only built if LLVM is also being built.
-lldb = true
 
 # Whether to deny warnings in crates
 #deny-warnings = true
