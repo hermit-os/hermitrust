@@ -58,7 +58,7 @@
 # likely, teach rustc about the C ABI of the target. Get in touch with the
 # Rust team and file an issue if you need assistance in porting!
 #targets = "AArch64;ARM;Hexagon;MSP430;Mips;NVPTX;PowerPC;RISCV;Sparc;SystemZ;WebAssembly;X86"
-targets = "X86"
+targets = "X86;AArch64"
 
 # LLVM experimental targets to build support for. These targets are specified in
 # the same format as above, but since these targets are experimental, they are
@@ -124,7 +124,7 @@ targets = "X86"
 # for. Each host triple will be used to produce a copy of the standard library
 # for each target triple.
 #target = ["x86_64-unknown-linux-gnu"] # defaults to just the build triple
-target = ['x86_64-unknown-hermit']
+target = ['x86_64-unknown-linux-gnu','x86_64-unknown-hermit','aarch64-unknown-hermit']
 
 # Instead of downloading the src/stage0.txt version of Cargo specified, use
 # this Cargo binary instead to build all Rust code
@@ -211,8 +211,8 @@ tools = ["cargo", "src", "llvm-tools", "llvm-tools-preview"]
 # Arguments passed to the `./configure` script, used during distcheck. You
 # probably won't fill this in but rather it's filled in by the `./configure`
 # script.
-#configure-args = []
-configure-args = ['--target=x86_64-unknown-hermit']
+configure-args = []
+#configure-args = ['--target=x86_64-unknown-hermit']
 
 # Indicates that a local rebuild is occurring instead of a full bootstrap,
 # essentially skipping stage0 as the local compiler is recompiling itself again.
@@ -389,15 +389,6 @@ backtrace = false
 # Indicates whether LLD will be compiled and made available in the sysroot for
 # rustc to execute.
 lld = true
-
-# Indicates whether LLD will be used to link Rust crates during bootstrap on
-# supported platforms. The LLD from the bootstrap distribution will be used
-# and not the LLD compiled during the bootstrap.
-#
-# LLD will not be used if we're cross linking or running tests.
-#
-# Explicitly setting the linker for a target will override this option.
-#use-lld = false
 
 # Indicates whether some LLVM tools, like llvm-objdump, will be made available in the
 # sysroot.
