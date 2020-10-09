@@ -21,7 +21,7 @@ optimize = true
 # only succeed if you use clang, lld, llvm-ar, and llvm-ranlib in your C/C++
 # toolchain (see the `cc`, `cxx`, `linker`, `ar`, and `ranlib` options below).
 # More info at: https://clang.llvm.org/docs/ThinLTO.html#clang-bootstrap
-thin-lto = true
+#thin-lto = false
 
 # Indicates whether an LLVM Release build should include debug info
 #release-debuginfo = false
