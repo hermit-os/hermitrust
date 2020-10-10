@@ -52,6 +52,7 @@ COPY --from=build /root/rust/build/x86_64-unknown-linux-gnu/llvm/build/bin/llvm-
 
 ENV PATH="/opt/hermit/bin:/root/.cargo/bin:${PATH}"
 ENV EDITOR=vim
+RUN PATH="/root/.cargo/bin:${PATH}" /root/.cargo/bin/cargo install cargo-download
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
