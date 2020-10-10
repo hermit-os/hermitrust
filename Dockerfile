@@ -27,15 +27,17 @@ WORKDIR /root/
 
 
 # Update and install required packets from ubuntu repository
-RUN apt-get clean && apt-get -qq update && apt-get install -y apt-transport-https curl wget vim git-all binutils autoconf automake make cmake qemu-system-x86 qemu-system-aarch64 nasm gcc g++ build-essential libtool bsdmainutils lld net-tools iputils-ping pkg-config libssl-dev
+RUN apt-get clean && apt-get -qq update && apt-get install -y apt-transport-https curl wget vim binutils autoconf automake make cmake qemu-system-x86 qemu-system-aarch64 nasm gcc g++ build-essential libtool bsdmainutils lld net-tools iputils-ping pkg-config libssl-dev
 
 # add path to hermitcore packets
 RUN echo "deb [trusted=yes] https://dl.bintray.com/hermitcore/ubuntu bionic main" | tee -a /etc/apt/sources.list
+RUN add-apt-repository ppa:git-core/ppa
 
 # Update Software repository
-#RUN apt-get -qq update
+RUN apt-get -qq update
 
 # Install required packets from ubuntu repository
+RUN apt-get install git
 #RUN apt-get install -y --allow-unauthenticated binutils-hermit gcc-hermit-rs #newlib-hermit-rs pte-hermit-rs gcc-hermit-rs libhermit-rs
 
 RUN mkdir -p /root/.cargo
