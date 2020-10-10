@@ -37,7 +37,7 @@ RUN add-apt-repository ppa:git-core/ppa
 RUN apt-get -qq update
 
 # Install required packets from ubuntu repository
-RUN apt-get install git
+RUN apt-get install -y git
 #RUN apt-get install -y --allow-unauthenticated binutils-hermit gcc-hermit-rs #newlib-hermit-rs pte-hermit-rs gcc-hermit-rs libhermit-rs
 
 RUN mkdir -p /root/.cargo
