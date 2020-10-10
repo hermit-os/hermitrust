@@ -27,7 +27,7 @@ WORKDIR /root/
 
 
 # Update and install required packets from ubuntu repository
-RUN apt-get clean && apt-get -qq update && apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake qemu-kvm qemu-system-x86 nasm gcc g++ build-essential libtool bsdmainutils lld net-tools iputils-ping
+RUN apt-get clean && apt-get -qq update && apt-get install -y apt-transport-https curl wget vim git binutils autoconf automake make cmake nasm gcc g++ build-essential libtool bsdmainutils lld net-tools iputils-ping libssl-dev
 
 # add path to hermitcore packets
 RUN echo "deb [trusted=yes] https://dl.bintray.com/hermitcore/ubuntu bionic main" | tee -a /etc/apt/sources.list
