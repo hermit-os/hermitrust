@@ -17,9 +17,9 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 ENV EDITOR=vim
 
 # build libos
-ARG LATEST
-ENV RUSTY_LATEST=$LATEST
-RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz" && mkdir libhermit && tar xzvf ${RUSTY_LATEST}.tar.gz --one-top-level=libhermit --strip-components 1 && cd libhermit && cargo build -Z build-std=core,alloc --target x86_64-unknown-hermit-kernel && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
+#ARG LATEST
+#ENV RUSTY_LATEST=$LATEST
+#RUN curl -sOL "https://github.com/hermitcore/libhermit-rs/archive/${RUSTY_LATEST}.tar.gz" && mkdir libhermit && tar xzvf ${RUSTY_LATEST}.tar.gz --one-top-level=libhermit --strip-components 1 && cd libhermit && cargo build -Z build-std=core,alloc --target x86_64-unknown-hermit-kernel && cp target/x86_64-unknown-hermit-kernel/debug/libhermit.a /root/.cargo/lib/rustlib/x86_64-unknown-hermit/lib
 
 # final stage
 FROM ubuntu:latest
