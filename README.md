@@ -11,7 +11,7 @@ Please pull the container and use *cargo* to cross compile the application.
 As an example, the following commands create the test application *Hello World* for RustyHermit.
 
 ```sh
-docker pull docker pull registry.git.rwth-aachen.de/acs/public/hermitcore/hermitrust:latest
+docker pull registry.git.rwth-aachen.de/acs/public/hermitcore/hermitrust:latest
 docker run -v $PWD:/volume -e USER=$USER -w /volume --rm -t registry.git.rwth-aachen.de/acs/public/hermitcore/hermitrust cargo new hello_world --bin
 cd hello_world
 docker run -v $PWD:/volume -e USER=$USER -w /volume --rm -t registry.git.rwth-aachen.de/acs/public/hermitcore/hermitrust cargo build --target x86_64-unknown-hermit
